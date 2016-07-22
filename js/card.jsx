@@ -18,7 +18,7 @@ var Card = React.createClass({
     },
     render: function() {
       console.log(this.props.description, ' is highlighted ', this.state.highlight);
-      var classes = 'card ' + (this.state.highlight ? 'highlight' : '');
+      var classes = 'card' + (this.state.highlight ? ' highlight' : '');
       return (
         <div className={classes} onClick={this.onClick}>
           <div className="card-description">{this.props.description}</div>
