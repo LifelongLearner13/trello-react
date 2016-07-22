@@ -13,10 +13,8 @@ var ListContainer = React.createClass({
 
   onDelClick: function (event, id) {
     var tempCardsArray = this.state.cards.filter(function(card) {
-      console.log('card.props.id', card.props.id);
       return id !== card.props.id;
     });
-    console.log('id', id);
     this.setState({cards: tempCardsArray});
   },
 
@@ -26,7 +24,6 @@ var ListContainer = React.createClass({
 
   onAddClick: function (event) {
     event.preventDefault();
-    console.log('this.state.text', this.state.text);
     var testCards = this.state.cards.slice();
     testCards.push(<Card key={this.state.counter} description={this.state.text} id={this.state.counter} onDelClick={this.onDelClick} />)
 

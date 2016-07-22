@@ -7,7 +7,6 @@ var Card = React.createClass({
         };
     },
    onClick: function() {
-      console.log('onClick for ', this.props.description);
         this.setState({
             highlight: !this.state.highlight
         });
@@ -17,7 +16,6 @@ var Card = React.createClass({
       this.props.onDelClick(event, this.props.id);
     },
     render: function() {
-      console.log(this.props.description, ' is highlighted ', this.state.highlight);
       var classes = 'card' + (this.state.highlight ? ' highlight' : '');
       return (
         <div className={classes} onClick={this.onClick}>

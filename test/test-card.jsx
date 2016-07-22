@@ -1,36 +1,31 @@
+/*---------- DEPENDENCIES ----------*/
 var React = require('react');
 var TestUtils = require('react-addons-test-utils');
 var should = require('chai').should();
 
-var Card = require('../js/card.jsx');
+var Card = require('../js/card');
 
+/*---------- TEST RENDER ----------*/
+var renderer = TestUtils.createRenderer();
+renderer.render(<Card description='text' />);
+
+/*---------- VARIABLES ----------*/
+var result = renderer.getRenderOutput();
+var card = result.props.children[0];
+var button = result.props.children[1];
+
+/*----------- TESTS -----------*/
 describe('Card component', function() {
-	it('renders the card text', function() {
-		var renderer = TestUtils.createRenderer();
-		renderer.render(<Card description='string' />);
-
-		var result = renderer.getRenderOutput();
+	it('Renders a card component with a text', function() {
 		result.props.className.should.equal('card');
 		result.type.should.equal('div');
+		card.type.should.equal('div');
+		card.props.className.should.equal('card-description');
+		card.props.children.should.equal('text');
+	});
+
+	it('Renders a delete button', function() {
+		button.type.should.equal('button');
 		
 	});
 });
-
-
-//   Card component
-// string  is highlighted  false
-// { '$$typeof': Symbol(react.element),
-//   type: 'div',
-//   key: null,
-//   ref: null,
-//   props:
-//    { className: 'card',
-//      onClick:
-//       { [Function: bound onClick]
-//         __reactBoundContext: [Object],
-//         __reactBoundMethod: [Function: onClick],
-//         __reactBoundArguments: null,
-//         bind: [Function] },
-//      children: [ [Object], [Object] ] },
-//   _owner: null,
-//   _store: {} }

@@ -21197,10 +21197,8 @@
 	
 	  onDelClick: function onDelClick(event, id) {
 	    var tempCardsArray = this.state.cards.filter(function (card) {
-	      console.log('card.props.id', card.props.id);
 	      return id !== card.props.id;
 	    });
-	    console.log('id', id);
 	    this.setState({ cards: tempCardsArray });
 	  },
 	
@@ -21210,7 +21208,6 @@
 	
 	  onAddClick: function onAddClick(event) {
 	    event.preventDefault();
-	    console.log('this.state.text', this.state.text);
 	    var testCards = this.state.cards.slice();
 	    testCards.push(React.createElement(Card, { key: this.state.counter, description: this.state.text, id: this.state.counter, onDelClick: this.onDelClick }));
 	
@@ -21289,7 +21286,6 @@
 	    };
 	  },
 	  onClick: function onClick() {
-	    console.log('onClick for ', this.props.description);
 	    this.setState({
 	      highlight: !this.state.highlight
 	    });
@@ -21299,8 +21295,7 @@
 	    this.props.onDelClick(event, this.props.id);
 	  },
 	  render: function render() {
-	    console.log(this.props.description, ' is highlighted ', this.state.highlight);
-	    var classes = 'card ' + (this.state.highlight ? 'highlight' : '');
+	    var classes = 'card' + (this.state.highlight ? ' highlight' : '');
 	    return React.createElement(
 	      'div',
 	      { className: classes, onClick: this.onClick },

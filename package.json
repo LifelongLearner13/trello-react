@@ -7,6 +7,7 @@
     "test": "mocha --compilers js:babel-register test/**/*.js*",
     "mkdir": "mkdir -p build",
     "build": "npm run clean && npm run mkdir && npm run build:html && npm run build:js",
+    "serve": "http-server build/",
     "watch": "npm run watch:html & npm run watch:js",
     "clean": "rm -rf build",
     "build:html": "npm run clean:html && cp index.html build/",
@@ -40,6 +41,7 @@
     "babel-register": "^6.9.0",
     "chai": "^3.5.0",
     "chokidar-cli": "^1.2.0",
+    "http-server": "^0.9.0",
     "mocha": "^2.5.3",
     "react-addons-test-utils": "^15.2.1",
     "webpack": "^1.13.1"
