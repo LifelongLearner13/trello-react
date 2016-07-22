@@ -49,184 +49,7 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(33);
 	
-	/* ------- Components --------- */
-	var BoardContainer = React.createClass({
-	  displayName: 'BoardContainer',
-	
-	  getInitialState: function getInitialState() {
-	    return {
-	      listTitle: '',
-	      lists: [],
-	      counter: 0
-	    };
-	  },
-	  onAddInputChange: function onAddInputChange(event) {
-	    this.setState({ listTitle: event.target.value });
-	  },
-	  onAddClick: function onAddClick(event) {
-	    event.preventDefault();
-	    var tempLists = this.state.lists.slice();
-	    tempLists.push(React.createElement(ListContainer, { key: this.state.counter, title: this.state.listTitle, id: this.state.counter }));
-	    var tempCounter = this.state.counter + 1;
-	    this.setState({
-	      listTitle: '',
-	      lists: tempLists,
-	      counter: tempCounter });
-	  },
-	  render: function render() {
-	    return React.createElement(Board, { title: 'Trello Board',
-	      onAddInputChange: this.onAddInputChange,
-	      onAddClick: this.onAddClick,
-	      lists: this.state.lists,
-	      value: this.state.listTitle
-	    });
-	  }
-	});
-	
-	var Board = React.createClass({
-	  displayName: 'Board',
-	
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      { className: 'board' },
-	      React.createElement(
-	        'div',
-	        { className: 'board-name' },
-	        this.props.title
-	      ),
-	      React.createElement(
-	        'form',
-	        null,
-	        React.createElement('input', { type: 'text', value: this.props.value, onChange: this.props.onAddInputChange }),
-	        React.createElement(
-	          'button',
-	          { type: 'submit', onClick: this.props.onAddClick },
-	          '+'
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'list-list' },
-	        this.props.lists
-	      )
-	    );
-	  }
-	});
-	
-	var ListContainer = React.createClass({
-	  displayName: 'ListContainer',
-	
-	  getInitialState: function getInitialState() {
-	    return {
-	      text: '',
-	      cards: [],
-	      counter: 0
-	    };
-	  },
-	
-	  onDelClick: function onDelClick(event, id) {
-	    var tempCardsArray = this.state.cards.filter(function (card) {
-	      console.log('card.props.id', card.props.id);
-	      return id !== card.props.id;
-	    });
-	    console.log('id', id);
-	    this.setState({ cards: tempCardsArray });
-	  },
-	
-	  onAddInputChange: function onAddInputChange(event) {
-	    this.setState({ text: event.target.value });
-	  },
-	
-	  onAddClick: function onAddClick(event) {
-	    event.preventDefault();
-	    console.log('this.state.text', this.state.text);
-	    var testCards = this.state.cards.slice();
-	    testCards.push(React.createElement(Card, { key: this.state.counter, description: this.state.text, id: this.state.counter, onDelClick: this.onDelClick }));
-	
-	    var tempCounter = this.state.counter + 1;
-	    this.setState({ cards: testCards,
-	      text: '', counter: tempCounter });
-	  },
-	
-	  render: function render() {
-	    return React.createElement(List, { title: this.props.title,
-	      cards: this.state.cards,
-	      value: this.state.text,
-	      onAddInputChange: this.onAddInputChange,
-	      onAddClick: this.onAddClick });
-	  }
-	});
-	
-	var List = React.createClass({
-	  displayName: 'List',
-	
-	
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      { className: 'list' },
-	      React.createElement(
-	        'div',
-	        { className: 'list-title' },
-	        this.props.title
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'card-holder' },
-	        this.props.cards
-	      ),
-	      React.createElement(
-	        'form',
-	        null,
-	        React.createElement('input', { type: 'text', value: this.props.value, onChange: this.props.onAddInputChange }),
-	        React.createElement(
-	          'button',
-	          { type: 'submit', onClick: this.props.onAddClick },
-	          '+'
-	        )
-	      )
-	    );
-	  }
-	});
-	
-	var Card = React.createClass({
-	  displayName: 'Card',
-	
-	  getInitialState: function getInitialState() {
-	    return {
-	      highlight: false
-	    };
-	  },
-	  onClick: function onClick() {
-	    console.log('onClick for ', this.props.description);
-	    this.setState({
-	      highlight: !this.state.highlight
-	    });
-	  },
-	  onDelete: function onDelete(event) {
-	    event.stopPropagation();
-	    this.props.onDelClick(event, this.props.id);
-	  },
-	  render: function render() {
-	    console.log(this.props.description, ' is highlighted ', this.state.highlight);
-	    var classes = 'card ' + (this.state.highlight ? 'highlight' : '');
-	    return React.createElement(
-	      'div',
-	      { className: classes, onClick: this.onClick },
-	      React.createElement(
-	        'div',
-	        { className: 'card-description' },
-	        this.props.description
-	      ),
-	      React.createElement(
-	        'button',
-	        { onClick: this.onDelete },
-	        '-'
-	      )
-	    );
-	  }
-	});
+	var BoardContainer = __webpack_require__(172);
 	
 	/* Runs when page is done loading. */
 	document.addEventListener('DOMContentLoaded', function () {
@@ -21264,6 +21087,238 @@
 	var ReactMount = __webpack_require__(164);
 	
 	module.exports = ReactMount.renderSubtreeIntoContainer;
+
+/***/ },
+/* 172 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	var Board = __webpack_require__(173);
+	var ListContainer = __webpack_require__(174);
+	
+	var BoardContainer = React.createClass({
+	  displayName: 'BoardContainer',
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      listTitle: '',
+	      lists: [],
+	      counter: 0
+	    };
+	  },
+	  onAddInputChange: function onAddInputChange(event) {
+	    this.setState({ listTitle: event.target.value });
+	  },
+	  onAddClick: function onAddClick(event) {
+	    event.preventDefault();
+	    var tempLists = this.state.lists.slice();
+	    tempLists.push(React.createElement(ListContainer, { key: this.state.counter, title: this.state.listTitle, id: this.state.counter }));
+	    var tempCounter = this.state.counter + 1;
+	    this.setState({
+	      listTitle: '',
+	      lists: tempLists,
+	      counter: tempCounter });
+	  },
+	  render: function render() {
+	    return React.createElement(Board, { title: 'Trello Board',
+	      onAddInputChange: this.onAddInputChange,
+	      onAddClick: this.onAddClick,
+	      lists: this.state.lists,
+	      value: this.state.listTitle
+	    });
+	  }
+	});
+	
+	module.exports = BoardContainer;
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(1);
+	
+	var Board = React.createClass({
+	  displayName: "Board",
+	
+	  render: function render() {
+	    return React.createElement(
+	      "div",
+	      { className: "board" },
+	      React.createElement(
+	        "div",
+	        { className: "board-name" },
+	        this.props.title
+	      ),
+	      React.createElement(
+	        "form",
+	        null,
+	        React.createElement("input", { type: "text", value: this.props.value, onChange: this.props.onAddInputChange }),
+	        React.createElement(
+	          "button",
+	          { type: "submit", onClick: this.props.onAddClick },
+	          "+"
+	        )
+	      ),
+	      React.createElement(
+	        "div",
+	        { className: "list-list" },
+	        this.props.lists
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = Board;
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	var List = __webpack_require__(175);
+	var Card = __webpack_require__(176);
+	
+	var ListContainer = React.createClass({
+	  displayName: 'ListContainer',
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      text: '',
+	      cards: [],
+	      counter: 0
+	    };
+	  },
+	
+	  onDelClick: function onDelClick(event, id) {
+	    var tempCardsArray = this.state.cards.filter(function (card) {
+	      console.log('card.props.id', card.props.id);
+	      return id !== card.props.id;
+	    });
+	    console.log('id', id);
+	    this.setState({ cards: tempCardsArray });
+	  },
+	
+	  onAddInputChange: function onAddInputChange(event) {
+	    this.setState({ text: event.target.value });
+	  },
+	
+	  onAddClick: function onAddClick(event) {
+	    event.preventDefault();
+	    console.log('this.state.text', this.state.text);
+	    var testCards = this.state.cards.slice();
+	    testCards.push(React.createElement(Card, { key: this.state.counter, description: this.state.text, id: this.state.counter, onDelClick: this.onDelClick }));
+	
+	    var tempCounter = this.state.counter + 1;
+	    this.setState({ cards: testCards,
+	      text: '', counter: tempCounter });
+	  },
+	
+	  render: function render() {
+	    return React.createElement(List, { title: this.props.title,
+	      cards: this.state.cards,
+	      value: this.state.text,
+	      onAddInputChange: this.onAddInputChange,
+	      onAddClick: this.onAddClick });
+	  }
+	});
+	
+	module.exports = ListContainer;
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(1);
+	
+	var List = React.createClass({
+	  displayName: "List",
+	
+	
+	  render: function render() {
+	    return React.createElement(
+	      "div",
+	      { className: "list" },
+	      React.createElement(
+	        "div",
+	        { className: "list-title" },
+	        this.props.title
+	      ),
+	      React.createElement(
+	        "div",
+	        { className: "card-holder" },
+	        this.props.cards
+	      ),
+	      React.createElement(
+	        "form",
+	        null,
+	        React.createElement("input", { type: "text", value: this.props.value, onChange: this.props.onAddInputChange }),
+	        React.createElement(
+	          "button",
+	          { type: "submit", onClick: this.props.onAddClick },
+	          "+"
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = List;
+
+/***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var Card = React.createClass({
+	  displayName: 'Card',
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      highlight: false
+	    };
+	  },
+	  onClick: function onClick() {
+	    console.log('onClick for ', this.props.description);
+	    this.setState({
+	      highlight: !this.state.highlight
+	    });
+	  },
+	  onDelete: function onDelete(event) {
+	    event.stopPropagation();
+	    this.props.onDelClick(event, this.props.id);
+	  },
+	  render: function render() {
+	    console.log(this.props.description, ' is highlighted ', this.state.highlight);
+	    var classes = 'card ' + (this.state.highlight ? 'highlight' : '');
+	    return React.createElement(
+	      'div',
+	      { className: classes, onClick: this.onClick },
+	      React.createElement(
+	        'div',
+	        { className: 'card-description' },
+	        this.props.description
+	      ),
+	      React.createElement(
+	        'button',
+	        { onClick: this.onDelete },
+	        '-'
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = Card;
 
 /***/ }
 /******/ ]);
