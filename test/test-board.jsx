@@ -1,8 +1,10 @@
 /*---------- DEPENDENCIES ----------*/
 var React = require('react');
+// TestUtils is a React addon that allows you to render a version of a component without needing access to the DOM.
 var TestUtils = require('react-addons-test-utils');
 var should = require('chai').should();
 
+// Modules required to run the tests
 var Board = require('../js/board');
 var List = require('../js/list');
 var	Card = require('../js/card');
@@ -23,6 +25,7 @@ renderer.render(
 />);
 
 /*---------- VARIABLES ----------*/
+// getRenderOutput returns the rendered React component, allowing us to check the type and props of the elements rendered by the component.
 var result = renderer.getRenderOutput();
 var children = result.props.children;
 var	listArr = children[2].props.children;
