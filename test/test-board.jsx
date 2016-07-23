@@ -10,6 +10,7 @@ var List = require('../js/list');
 var	Card = require('../js/card');
 
 /*---------- TEST RENDER ----------*/
+// The renderer performs 'shallow rendering', meaning that it will only render components one level deep (not able to render components within components)
 var renderer = TestUtils.createRenderer();
 renderer.render(
 <Board 
